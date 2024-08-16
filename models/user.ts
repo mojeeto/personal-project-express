@@ -3,6 +3,7 @@ import { model, Document, Schema } from "mongoose";
 // T for general usage
 export interface TUser {
   name: string;
+  amount_money: number;
 }
 
 // I for create Schema and model
@@ -15,6 +16,11 @@ const UserSchema = new Schema<IUser>(
       type: String,
       required: true,
     },
+    amount_money: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -22,5 +28,5 @@ const UserSchema = new Schema<IUser>(
 );
 
 // create and export default model
-const UserModel = model<IUser>("user", UserSchema);
+const UserModel = model<IUser>("User", UserSchema);
 export default UserModel;
