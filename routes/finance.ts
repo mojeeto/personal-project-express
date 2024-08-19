@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { GetFinance } from "../controllers/financeController";
 
 const financeRouter = Router();
 
 // GET::Get all finance data about related user
-financeRouter.get("/finance");
+financeRouter.get("/finance", GetFinance);
 
 // POST::Create new finance record
 financeRouter.post("/finance");

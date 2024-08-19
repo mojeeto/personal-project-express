@@ -23,7 +23,6 @@ function LogTime() {
 export default function Log(as: LogTypes, data: LogDataObject) {
   if (!data.priority) data.priority = LogPriority.low;
   // if isProduction was false, that means is development.
-  console.log(IsProduction);
   if (!IsProduction) {
     const { logTime } = LogTime();
     const message = `${as}::[${data.subject}]: ${data.message} ${logTime}`;
