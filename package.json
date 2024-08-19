@@ -4,7 +4,8 @@
   "description": "Personal Project Backend",
   "main": "main.ts",
   "scripts": {
-    "dev": "nodemon ./main.ts"
+    "dev": "nodemon ./main.ts",
+    "start": "NODE_ENV=production nodemon ./main.ts"
   },
   "repository": {
     "type": "git",
