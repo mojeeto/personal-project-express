@@ -7,6 +7,7 @@ async function RunServer() {
   // create app & server
   const app = express();
   const server = http.createServer(app);
+  app.use(express.json());
 
   app.use(mainRouter);
 

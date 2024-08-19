@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { GetFinance } from "../controllers/financeController";
+import { GetFinance, PostFinance } from "../controllers/financeController";
 
 const financeRouter = Router();
 
@@ -7,7 +7,7 @@ const financeRouter = Router();
 financeRouter.get("/finance", GetFinance);
 
 // POST::Create new finance record
-financeRouter.post("/finance");
+financeRouter.post("/finance", PostFinance);
 
 // Patch::Update finance record
 financeRouter.patch("/finance");

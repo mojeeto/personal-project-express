@@ -14,7 +14,21 @@ export const GetFinance: RequestHandler = async (req, res, next) => {
   res.json(financeRecords);
 };
 
-export const PostFinance: RequestHandler = (req, res, next) => {};
+/**
+ * With this request handler function user can create new finance records.
+ *
+ * @async
+ * @function PostFinance
+ * @type {RequestHandler}
+ * */
+export const PostFinance: RequestHandler = (req, res, next) => {
+  // TODO: Use zod validation for check these params of request body.
+  const { subject, amount, type, description } = req.body;
+  // need userid
+  res.json({
+    message: `your record with subject{${subject}} amount of ${amount} with type of {${type}} and this description: ${description} was created!.USERID::`,
+  });
+};
 
 export const PatchFinance: RequestHandler = (req, res, next) => {};
 
