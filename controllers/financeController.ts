@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { findFinanceRecord } from "../repos/financeRepo";
+import { resJson, ResJsonStatusCode } from "../utils/helper";
 
 /**
  * This function is controller for /finance route app.
@@ -25,9 +26,17 @@ export const PostFinance: RequestHandler = (req, res, next) => {
   // TODO: Use zod validation for check these params of request body.
   const { subject, amount, type, description } = req.body;
   // need userid
-  res.json({
-    message: `your record with subject{${subject}} amount of ${amount} with type of {${type}} and this description: ${description} was created!.USERID::`,
-  });
+  resJson(
+    res,
+    {
+      subject,
+      amount,
+      type,
+      description,
+    },
+    `your record with subject{${subject}} amount of ${amount} with type of {${type}} and this description: ${description} was created!.USERID::`,
+    ResJsonStatusCode.CREATED,
+  );
 };
 
 export const PatchFinance: RequestHandler = (req, res, next) => {};
