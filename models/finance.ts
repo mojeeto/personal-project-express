@@ -1,4 +1,5 @@
 import { Document, Schema, model, PopulatedDoc } from "mongoose";
+import * as z from "zod";
 import { IUser } from "./user";
 
 export type TTRecordFinance = "EXPEND" | "INCOME";
@@ -10,6 +11,13 @@ export interface TFinance {
   description: string;
   user: PopulatedDoc<IUser & Document>;
 }
+
+export const FinanceZodObject = z.object({
+  subject: z.string(),
+  amount: z.number(),
+  type: z.string(),
+  description: z.string(),
+});
 
 export interface IFinance extends Document, TFinance {}
 

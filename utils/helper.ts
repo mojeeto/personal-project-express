@@ -25,16 +25,20 @@ export enum ResJsonStatusCode {
  *
  * @function resJson
  * @param {Response} res
- * @param {Object} data
- * @param {String} message
- * @param {ResJsonStatusCode} statusCode
+ * @param {Object} responseData that have 3 properties
+ * message is response message
+ * data is optional for when we want to send data to user
+ * statusCode is status of response that related to {ResJsonStatusCode}
  */
 export function resJson(
   res: Response,
-  data: object,
-  message: string,
-  statusCode?: ResJsonStatusCode,
+  responseData: {
+    message: string;
+    data?: object;
+    statusCode?: ResJsonStatusCode;
+  },
 ) {
+  const { statusCode, message, data } = responseData;
   res.status(!statusCode ? ResJsonStatusCode.OK : statusCode);
   res.json({
     data,
