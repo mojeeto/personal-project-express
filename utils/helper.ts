@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { ZodError } from "zod";
 
 export const IsProduction = process.env.NODE_ENV === "production";
 
@@ -16,6 +17,28 @@ export enum ResJsonStatusCode {
   FORBIDDEN = 403,
   NOT_FOUND = 404,
   METHOD_NOT_ALLOWED = 405,
+}
+
+/**
+ * this function get error property then return it as
+ * validation error object that contains validation error messages and paths.
+ *
+ * @function ZodErrorHandler
+ * @param {ZodError} err is error of try catch scope.
+ * */
+export function ZodErrorHandler(err: ZodError) {
+  const { errors } = err;
+  const validationErrorData: { [key: string]: string } = {};
+  errors.forEach((error) => {
+    const message = error.message;
+    const field = error.path[0];
+    validationErrorData[field] = message;
+  });
+  return {
+    message: "Validation Error!",
+    statusCode: ResJsonStatusCode.BAD_REQUEST,
+    data: validationErrorData,
+  };
 }
 
 /**

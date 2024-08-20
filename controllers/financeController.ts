@@ -1,7 +1,6 @@
 import { RequestHandler } from "express";
 import { findFinanceRecord } from "../repos/financeRepo";
 import { resJson, ResJsonStatusCode } from "../utils/helper";
-import { FinanceZodObject } from "../models/finance";
 
 /**
  * This function is controller for /finance route app.
@@ -24,15 +23,6 @@ export const GetFinance: RequestHandler = async (req, res, next) => {
  * @type {RequestHandler}
  * */
 export const PostFinance: RequestHandler = async (req, res, next) => {
-  // TODO: Use zod validation for check these params of request body.
-  try {
-    await FinanceZodObject.parseAsync(req.body);
-  } catch (err) {
-    return resJson(res, {
-      message: "Fields is not correct!",
-      statusCode: ResJsonStatusCode.BAD_REQUEST,
-    });
-  }
   const { subject, amount, type, description } = req.body;
   // need userid
   resJson(res, {
